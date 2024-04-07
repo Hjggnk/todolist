@@ -5,12 +5,15 @@ import { MaterialIcons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import CameraImage from './CameraImage';
 import ImageViewer from './ImageViewer';
+import EditInput from './EditInput';
   
 export default function TodoList({ item, deleteItem, photoAttach }) {
   // check *this* component has access to test version of photoAttach that logs function calls  
   // photoAttach("from export default function TodoList" + JSON.stringify(item));
   const [modalVisibleCameraImage, setModalVisibleCameraImage] = useState(false);
   const [modalVisibleImageViewer, setModalVisibleImageViewer] = useState(false);
+  const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
+  
   return (
     <ComponentContainer>
       <ListContainer>
@@ -25,7 +28,7 @@ export default function TodoList({ item, deleteItem, photoAttach }) {
               console.log('Modal has been closed.');
               setModalVisibleCameraImage(!modalVisibleCameraImage);
             }}>
-            <CameraImage photoAttach={photoAttach} item={item} /> 
+            <CameraImage photoAttach={photoAttach} item={item} setModalvisible={setModalVisibleCameraImage}/> 
           </Modal> 
           <Modal
             transparent={false}
@@ -34,8 +37,17 @@ export default function TodoList({ item, deleteItem, photoAttach }) {
               console.log('Modal has been closed.');
               setModalVisibleImageViewer(!modalVisibleImageViewer);
             }}>
-            <ImageViewer item={item} /> 
-          </Modal>          
+            <ImageViewer item={item} setModalvisible={setModalVisibleImageViewer}/> 
+          </Modal> 
+          <Modal
+            transparent={false}
+            visible={modalVisibleEdit}
+            onRequestClose={() => {
+              console.log('Modal has been closed.');
+              setModalVisibleEdit(!modalVisibleEdit);
+            }}>
+            <EditInput item={item} setModalvisible={setModalVisibleEdit}/> 
+          </Modal>            
           <TextItem>
             {item.value}
             {item.location ? (
@@ -55,7 +67,8 @@ export default function TodoList({ item, deleteItem, photoAttach }) {
             name="edit"
             size={24}
             color="midnightblue"
-            onPress={() =>console.log('edit clicked', item.key) }
+            onPress={() => {console.log('edit clicked', item.key)
+            setModalVisibleEdit(!modalVisibleEdit); } }
           />
           <MaterialIcons
             name="photo"

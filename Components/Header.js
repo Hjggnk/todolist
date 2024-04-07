@@ -1,17 +1,16 @@
 import  React from "react";
 import styled from "styled-components/native";
 
-
-const week = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday',];
 let today = new Date().toISOString().slice(0, 10);
+const week = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
 let number = new Date().getDay();
-
 export default function Header() {
   return (
     <ComponentContainer>
-      <HeaderText>Happy</HeaderText>
+      <HeaderText>happy</HeaderText>
       <HeaderList>{week[number]}</HeaderList>
       <HeaderList>{today}</HeaderList>
+
     </ComponentContainer>
   );
 }
@@ -24,13 +23,13 @@ const ComponentContainer = styled.View`
 `;
 
 const HeaderText = styled.Text`
-  color: yellow;
+  color: white;
   font-family: poppins-bold;
   font-size: 30px;
 `;
 
 const HeaderList = styled.Text`
-  color: yellow;
+  color: white;
   font-family: poppins-bold;
   font-size: 20px;
   margin-right: 20px;

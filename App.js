@@ -206,7 +206,7 @@ const photoAttach = ( key,uri ) => {
  
 
 const ComponentContainer = styled.View`
-  background-color: #9400d3;
+  background-color: #8a2be2;
   height: 100%;
   flex-direction: column;
   align-items: center;
